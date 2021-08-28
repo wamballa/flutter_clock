@@ -1,0 +1,142 @@
+///
+/// Version 0.3 = layout fixed
+///
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:timer_builder/timer_builder.dart';
+import 'dart:async';
+import 'animation.dart';
+
+class Clock extends StatefulWidget {
+  @override
+  _ClockState createState() => _ClockState();
+}
+
+class _ClockState extends State<Clock> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
+  // final String currentTime = getSystemTime();
+
+  Color textColor = Colors.red.shade900;
+  bool isAnimationPlaying = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
+      DateTime nowTime = DateTime.now();
+      if (nowTime.second % 2 == 0) {
+        // isAnimationPlaying = true;
+        textColor = Colors.blue;
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const Animation_Page(),
+        //   ),
+        // );
+      } else {
+        textColor = Colors.pink;
+      }
+
+      print("hello");
+      return Container(
+        color: Colors.black,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 6,
+              child: Container(
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Text(
+                    "${getSystemTime()}",
+                    style: TextStyle(
+                      decoration: TextDecoration.none,
+                      fontFamily: 'GamePlay',
+                      color: textColor,
+                      fontSize: 400,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Spacer(flex: 1),
+            Flexible(
+              flex: 4,
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      child: FittedBox(
+                        fit: BoxFit.fitHeight,
+                        alignment: AlignmentDirectional.center,
+                        child: Padding(
+                          padding: EdgeInsets.all(50),
+                          child: Text(
+                            "version 0.3",
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontFamily: 'GamePlay',
+                                color: textColor,
+                                fontSize: 30,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: Container(
+                      // color: Colors.teal,
+                      alignment: Alignment.center,
+                      child: FittedBox(
+                        fit: BoxFit.fitHeight,
+                        child: Text(
+                          "${getSystemSeconds()}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontFamily: 'GamePlay',
+                              color: textColor,
+                              fontSize: 300,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  String getSystemTime() {
+    var now = new DateTime.now();
+    return new DateFormat("HH:mm").format(now);
+  }
+
+  String getSystemSeconds() {
+    DateTime now = DateTime.now();
+    return new DateFormat("ss").format(now);
+  }
+}
