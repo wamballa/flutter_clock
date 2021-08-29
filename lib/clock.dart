@@ -24,7 +24,7 @@ class _ClockState extends State<Clock> {
   String imageName = '';
 
   void startTimer() {
-    imageName = getRandomImage();
+    // imageName = getRandomImage();
     const oneSec = const Duration(seconds: 1);
     Timer.periodic(
       oneSec,
@@ -33,7 +33,8 @@ class _ClockState extends State<Clock> {
           DateTime now = DateTime.now();
           if (isShowingClock) {
             // if (now.second % 5 == 0) {
-            if (now.minute == 0) {
+            // if (now.minute == 0) {
+            if (now.minute % 15 == 0) {
               isShowingClock = !isShowingClock;
               imageName = getRandomImage();
             }
@@ -49,29 +50,12 @@ class _ClockState extends State<Clock> {
   }
 
   String getRandomImage() {
-    List<String> imageFiles = [
-      'images/0.gif',
-      'images/1.gif',
-      'images/2.gif',
-      'images/3.gif',
-      'images/4.gif',
-      'images/5.gif',
-      'images/6.gif',
-      'images/7.gif',
-      'images/8.gif',
-      'images/9.gif',
-      'images/10.gif',
-      'images/11.gif',
-      'images/12.gif',
-      'images/13.gif',
-      'images/14.gif',
-      'images/15.gif',
-      'images/16.gif',
-      'images/17.gif',
-      'images/18.gif',
-      'images/19.gif',
-      'images/20.gif',
-    ];
+    List<String> imageFiles = [];
+
+    for (int i = 0; i < 93; i++) {
+      imageFiles.add('images/${i}.gif');
+    }
+
     int r = Random().nextInt(imageFiles.length - 1);
     return imageFiles[r];
   }
@@ -144,15 +128,15 @@ class _ClockState extends State<Clock> {
                       fit: BoxFit.fitHeight,
                       alignment: AlignmentDirectional.center,
                       child: Padding(
-                        padding: EdgeInsets.all(7),
+                        padding: EdgeInsets.only(bottom: 25),
                         child: Text(
-                          "version 0.4",
+                          "version 0.4.1",
                           textAlign: TextAlign.end,
                           style: TextStyle(
                               decoration: TextDecoration.none,
                               fontFamily: 'GamePlay',
                               color: textColor,
-                              fontSize: 10,
+                              fontSize: 50,
                               fontWeight: FontWeight.normal),
                         ),
                       ),

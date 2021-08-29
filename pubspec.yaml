@@ -30,7 +30,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
   timer_builder: ^2.0.0
-  file_picker: ^4.0.0
 
 dev_dependencies:
   flutter_test:
